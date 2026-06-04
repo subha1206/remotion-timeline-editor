@@ -1,12 +1,17 @@
 import type { EditorState, Track, Clip } from "./types";
 
+// Local videos live in app/public/. import.meta.env.BASE_URL makes the URL work
+// both in dev ("/") and on GitHub Pages ("/remotion-timeline-editor/"). They are
+// served same-origin, so OffthreadVideo's canvas frame extraction needs no CORS.
+const VIDEO_1_SRC = `${import.meta.env.BASE_URL}video-1.mp4`;
+const VIDEO_2_SRC = `${import.meta.env.BASE_URL}video-2.mp4`;
 const AUDIO_SRC =
   "https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3";
 const IMAGE_SRC = "https://picsum.photos/seed/overlay/400/200";
 
-// Three separate video layers (each its own track), then visual / subtitle /
-// audio above them. order drives both row position (ascending) and player
-// z-index (higher order paints on top), so videos sit at the bottom of the stack.
+// One video track (two clips), then visual / subtitle / audio above it. order
+// drives both row position (ascending) and player z-index (higher order paints
+// on top), so the video sits at the bottom of the stack.
 const tracks: Track[] = [
   { id: "track_video", type: "video", order: 0 },
   { id: "track_visual", type: "visual", order: 1 },
@@ -22,7 +27,7 @@ const clips: Clip[] = [
     from: 0,
     durationInFrames: 120,
     trimStart: 0,
-    src: "https://storage.googleapis.com/bkt-vidyoaipoc-vidyo-bucket/logs/output-videos/3a4e86e9-f444-417a-a619-96e61e71da18/jelfFVonRkZDU3wpHpuL-.mp4",
+    src: VIDEO_2_SRC,
   },
   {
     id: "clip_v2",
@@ -31,7 +36,7 @@ const clips: Clip[] = [
     from: 130,
     durationInFrames: 90,
     trimStart: 0,
-    src: "https://storage.googleapis.com/bkt-vidyoaipoc-vidyo-bucket/logs/output-videos/8e29a4f7-57e6-4500-92e5-f83056f66b13/qFQhKmMzfOxgV0A01dXvr.mp4",
+    src: VIDEO_1_SRC,
   },
   {
     id: "clip_img",
