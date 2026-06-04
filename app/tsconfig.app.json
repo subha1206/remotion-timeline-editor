@@ -15,6 +15,9 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    /* Type safety (project invariant: strict, no any, no casts) */
+    "strict": true,
+
     /* Linting */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
